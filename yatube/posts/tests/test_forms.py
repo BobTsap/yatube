@@ -128,11 +128,14 @@ class CommentCreateFormTest(TestCase):
             Comment.objects.count(), 1,
         )
         form_data = {'text': 'Комментарий'}
-        comment_url = reverse('posts:add_comment',kwargs={'post_id': self.post.id},)
+        comment_url = reverse(
+            'posts:add_comment',
+            kwargs={'post_id': self.post.id},
+        )
 
-        response = self.guest_client.post(comment_url,
-                                          data=form_data,
-                                          follow=True)
+        self.guest_client.post(comment_url,
+                               data=form_data,
+                               follow=True)
         self.assertEqual(
             Comment.objects.count(), 1,
         )

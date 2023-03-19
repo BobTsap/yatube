@@ -114,7 +114,7 @@ class TestViews(TestCase):
             content_type='image/gif'
         )
 
-        post = Post.objects.create(
+        Post.objects.create(
             author=self.user_author,
             group=self.group,
             image=uploaded)
@@ -308,7 +308,10 @@ class FollowViewsTest(TestCase):
             'user': self.user_follower,
             'author': self.user_author,
         }
-        url_redirect = reverse('posts:profile', kwargs={'username': self.user_author.username})
+        url_redirect = reverse(
+            'posts:profile',
+            kwargs={'username': self.user_author.username}
+        )
         response = self.client.post(
             reverse('posts:profile_follow', kwargs={
                 'username': self.user_author.username}),
@@ -322,7 +325,7 @@ class FollowViewsTest(TestCase):
             reverse('posts:profile_unfollow', kwargs={
                 'username': self.user_author.username}),
             data=follow_data, follow=True)
-        
+
         count_follow = Follow.objects.filter(user=self.user_follower).count()
 
         self.assertEqual(count_follow, 0)
@@ -340,8 +343,8 @@ class FollowViewsTest(TestCase):
             data=follow_data, follow=True)
 
         count_follow = Follow.objects.filter(user=self.user_follower).count()
-        count_not_follow = Follow.objects.filter(user=self.user_not_follower).count()
+        count_not_follow = Follow.objects.filter(
+            user=self.user_not_follower).count()
 
         self.assertEqual(count_follow, 1)
         self.assertEqual(count_not_follow, 0)
-        
