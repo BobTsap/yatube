@@ -40,6 +40,7 @@ class Post(models.Model):
     def __str__(self):
         return self.text[:15]
 
+
 class Comment(models.Model):
     post = models.ForeignKey(
         Post,
@@ -53,7 +54,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name='comments',
     )
-    text  = models.TextField()
+    text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
 
 

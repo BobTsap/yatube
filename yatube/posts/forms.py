@@ -12,9 +12,9 @@ class PostForm(forms.ModelForm):
             'image': 'Картинка поста',
         }
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
-        labels = {'text': 'Текст комментария:',}
-
+        labels = {'text': 'Текст комментария:', }
