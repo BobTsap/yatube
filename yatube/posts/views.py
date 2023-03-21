@@ -8,7 +8,7 @@ from posts.forms import CommentForm, PostForm
 
 
 def index(request):
-    post_list = Post.objects.all()
+    post_list = Post.objects.all().select_related('author')
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -42,6 +42,7 @@ def profile(request, username):
     page_obj = paginator.get_page(page_number)
 
     following = (request.user.is_authenticated
+                 and request.user.username != username
                  and Follow.objects.filter(
                      user=request.user,
                      author=author).exists())
