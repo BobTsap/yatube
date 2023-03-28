@@ -120,7 +120,7 @@ class CommentCreateFormTest(TestCase):
 
     def test_comment_not_authorized_client(self):
         """Комментировать посты может только авторизованный пользователь"""
-        self.comment = Comment.objects.create(
+        Comment.objects.create(
             post_id=self.post.id,
             author=self.user,
         )

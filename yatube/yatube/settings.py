@@ -22,11 +22,18 @@ CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'www.bobtsap.pythonanywhere.com',
+    'bobtsap.pythonanywhere.com',
     'localhost',
     '127.0.0.1',
     '[::1]',
     'testserver',
 ]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+] 
+
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:main_page'
 # LOGOUT_REDIRECT_URL = 'posts:main_page'
@@ -49,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'yatube.urls'
